@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>minjing的个人网页</title>
+<style>
+    /* ===== 基础 ===== */
+    * { box-sizing: border-box; }
+
+    html {
+      /* 锚点跳转时目标不被导航栏盖住 */
+      scroll-padding-top: 64px;
+    }
+
+    body {
+      margin: 0;
+      padding-top: 64px;        /* 给固定导航栏留出高度 */
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #a8436b;
+      background:#fff8fa ;
+    }
+
+    /* ===== 固定导航栏 ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      background: #fdeef3 ;
+      border-bottom: 1px solid #f8c8d8;
+    }
+
+    .nav a {
+      color: #a8436b;
+      text-decoration: none;
+      padding: 4px 2px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav a:hover {
+      border-bottom-color:#f07fa8 ;
+    }
+
+    /* ===== 内容卡片 ===== */
+    main {
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 36px;
+      background:  #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(184, 58, 107, .08);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      color:  #b83a6b;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      color: #d9558a;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      margin-top: 18px;
+      font-size: 19px;
+      color: #ec6a9c;
+    }
+
+    /* 只有直接放在 main 下的 h2 才需要上间距 */
+    main > h2 { margin-top: 32px; }
+
+    p { margin: 0 0 12px; }
+
+    a { color:  #d9558a; }
+
+    /* ===== 个人简介 ===== */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      margin-top: 26px;
+      padding: 26px;
+      background:#fdf0f5;
+      border-radius: 12px;
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbd0e0,  #f4a0c0);
+      color: #a8436b ;
+      font-size: 42px;
+      line-height: 96px;
+      text-align: center;
+    }
+
+    /* ===== 作品列表 ===== */
+    .works {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .work {
+      flex: 1 1 240px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background:#fffafc ;
+      border: 1px solid  #f8d4e0;
+      border-radius: 12px;
+    }
+
+    .work-links {
+      margin-top: auto;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .work-links a {
+     font-weight: bold;
+     text-decoration: none;
+     color:#d9558a;
+    }
+    .work-links a:hover {
+     color:#b83a6b ;
+    }
+    /* ===== 分隔区块 ===== */
+    .details,
+    .contact {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #f8d4e0;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color:#8a6b76 ;
+      font-size: 15px;
+    }
+
+
+</style>
+</head>
+<body>
+    <nav class="nav">
+    <a href="#home">首页</a>
+    <a href="#about">关于我</a>
+    <a href="#works">我的作品</a>
+    <a href="#contact">联系我</a>
+  </nav>
+
+<main>
+    <header id="home">
+       <h1>梁敏晶的个人主页</h1>
+    </header>
+    
+    <section class="profile" id="about">
+      <div class="avatar">梁</div>
+      <div>
+        <h2>你好呀~我是梁敏晶</h2>
+        <p>喜欢滑板，也喜欢看小说动漫电影，如果大家有好看的番，多多推荐给我吧！˶╹ᵕ╹˶</p>
+        <p>同时，我也喜欢摄影。</p>
+      </div>
+    </section>
+
+     <h2 id="works">我的作品</h2>
+    <section class="works">
+      <article class="work">
+        <h3>个人主页</h3>
+        <p>用来展示我的滑板</p>
+        <div class="work-links">
+        <a href="img/4.jpg" target="_blank">查看作品</a></div>
+      </article>
+      <article class="work">
+        <h3>校园摄影集</h3>
+        <p>用照片分享校园里的日常。</p>
+
+        <div class="work-links">
+        <a href="img/1.jpg" target="_blank">图一</a>
+        <a href="img/2.jpg" target="_blank">图二</a>
+        <a href="img/3.jpg" target="_blank">图三</a>
+        </div>
+        
+      </article>
+      </section> 
+      <section class="details">
+      <h2>作品详情</h2>
+      <h3 id="project-1">个人主页</h3>
+      <p>滑板是一项很酷的运动，有句话说得好：“站在滑板上，就是站在自由的边缘。”</p>
+      <h3 id="project-2">校园摄影集</h3>
+      <p>上外的校园很美，每次漫步在校园中，都感觉无比幸福。要是没有各种ddl的催促，我想我会更享受这份宁静。</p>
+      </section>
+      <section class="contact" id="contact">
+      <h2>我的联系方式</h2>
+      <p>欢迎大家来和我一起交流番剧，滑板以及摄影相关的话题~</p>
+      <p>邮箱：<a href="mailto:l914628325@qq.com">l914628325@qq.com</a></p>
+    </section>
+</main>
+<footer>梁敏晶的个人主页</footer>
+</body>
+</html>
