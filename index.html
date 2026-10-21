@@ -3,217 +3,749 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>minjing的个人网页</title>
+<meta name="description" content="梁敏晶的个人主页 —— 滑板、摄影与生活分享">
+<title>minjing 的个人主页</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23f4a0c0'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='%23fff' font-family='sans-serif'%3E梁%3C/text%3E%3C/svg%3E">
 <style>
-    /* ===== 基础 ===== */
-    * { box-sizing: border-box; }
+  :root {
+    --pink-900: #8a3a58;
+    --pink-700: #b83a6b;
+    --pink-600: #d9558a;
+    --pink-500: #f07fa8;
+    --pink-300: #f8c8d8;
+    --pink-200: #fbdce8;
+    --pink-100: #fdf0f5;
+    --pink-50:  #fff8fa;
+    --ink:      #6b4453;
+    --ink-soft: #a3798a;
+    --card-shadow: 0 6px 24px rgba(184, 58, 107, .10);
+    --radius: 16px;
+    --nav-h: 64px;
+  }
 
-    html {
-      /* 锚点跳转时目标不被导航栏盖住 */
-      scroll-padding-top: 64px;
-    }
+  * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      padding-top: 64px;        /* 给固定导航栏留出高度 */
-      font-family: "Microsoft YaHei", sans-serif;
-      font-size: 17px;
-      line-height: 1.7;
-      color: #a8436b;
-      background:#fff8fa ;
-    }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+  }
 
-    /* ===== 固定导航栏 ===== */
-    .nav {
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    margin: 0;
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--pink-50);
+  }
+
+  img { max-width: 100%; display: block; }
+
+  /* ===== 导航栏 ===== */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(16px, 4vw, 40px);
+    background: rgba(253, 238, 243, .88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--pink-300);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--pink-700);
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .nav-logo .logo-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    font-size: 17px;
+    display: grid;
+    place-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: clamp(14px, 3vw, 30px);
+  }
+
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+
+  .nav-links a:hover { color: var(--pink-700); }
+  .nav-links a.active { color: var(--pink-700); border-bottom-color: var(--pink-500); font-weight: 600; }
+
+  /* 移动端汉堡按钮 */
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 10px;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    background: var(--pink-700);
+    border-radius: 2px;
+    margin: 6px 0;
+    transition: transform .25s, opacity .25s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ===== 首屏 Hero ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(64px, 12vh, 110px) 24px clamp(56px, 10vh, 90px);
+    text-align: center;
+    background:
+      radial-gradient(600px 300px at 15% 0%, rgba(240, 127, 168, .18), transparent 70%),
+      radial-gradient(700px 340px at 85% 10%, rgba(217, 85, 138, .14), transparent 70%),
+      linear-gradient(180deg, var(--pink-100), var(--pink-50));
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--pink-300);
+    color: var(--pink-700);
+    font-size: 14px;
+    letter-spacing: 1px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .hero h1 {
+    margin: 18px 0 10px;
+    font-size: clamp(30px, 6vw, 46px);
+    color: var(--pink-700);
+    letter-spacing: 2px;
+  }
+
+  .hero p.sub {
+    margin: 0 auto;
+    max-width: 560px;
+    color: var(--ink-soft);
+    font-size: clamp(15px, 2.4vw, 18px);
+  }
+
+  .hero-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(240, 127, 168, .45);
+  }
+  .btn-primary:hover { box-shadow: 0 10px 22px rgba(240, 127, 168, .55); }
+
+  .btn-ghost {
+    color: var(--pink-700);
+    border: 1.5px solid var(--pink-300);
+    background: #fff;
+  }
+  .btn-ghost:hover { border-color: var(--pink-500); }
+
+  /* ===== 通用区块 ===== */
+  main { max-width: 1020px; margin: 0 auto; padding: 0 24px 40px; }
+
+  section.block { padding-top: 56px; }
+
+  .block-head { text-align: center; margin-bottom: 28px; }
+
+  .block-head h2 {
+    margin: 0;
+    font-size: clamp(24px, 4vw, 30px);
+    color: var(--pink-700);
+  }
+
+  .block-head .divider {
+    width: 56px;
+    height: 4px;
+    margin: 12px auto 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--pink-500), var(--pink-300));
+  }
+
+  .block-head p.desc { color: var(--ink-soft); margin: 10px 0 0; }
+
+  /* ===== 关于我 ===== */
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 30px;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .avatar {
+    flex-shrink: 0;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    font-size: 44px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px rgba(240, 127, 168, .4);
+  }
+
+  .profile h3 { margin: 0 0 6px; font-size: 21px; color: var(--pink-700); }
+  .profile p { margin: 0 0 12px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .tag {
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: var(--pink-100);
+    border: 1px solid var(--pink-300);
+    color: var(--pink-700);
+    font-size: 14px;
+  }
+
+  /* ===== 作品卡片 ===== */
+  .works {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .work {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid var(--pink-200);
+    border-radius: var(--radius);
+    transition: transform .25s, box-shadow .25s;
+  }
+
+  .work:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(184, 58, 107, .16);
+  }
+
+  .work .work-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    background: var(--pink-100);
+    margin-bottom: 14px;
+  }
+
+  .work h3 { margin: 0 0 8px; font-size: 19px; color: var(--pink-700); }
+  .work p { margin: 0 0 16px; color: var(--ink-soft); flex: 1; }
+
+  .work-links { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  .work-links a {
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--pink-600);
+    font-size: 15px;
+  }
+  .work-links a:hover { color: var(--pink-700); text-decoration: underline; }
+
+  /* ===== 摄影集 ===== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .gallery figure {
+    margin: 0;
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: zoom-in;
+    box-shadow: var(--card-shadow);
+    background: var(--pink-100);
+  }
+
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    transition: transform .4s ease;
+  }
+
+  .gallery figure:hover img { transform: scale(1.05); }
+
+  .gallery figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 26px 14px 12px;
+    color: #fff;
+    font-size: 15px;
+    background: linear-gradient(180deg, transparent, rgba(90, 20, 50, .65));
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .gallery figure:hover figcaption,
+  .gallery figure:focus-visible figcaption { opacity: 1; }
+
+  /* ===== 作品详情 ===== */
+  .detail-card {
+    padding: 26px 28px;
+    background: #fff;
+    border-radius: var(--radius);
+    border: 1px solid var(--pink-200);
+    margin-bottom: 18px;
+  }
+
+  .detail-card h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    color: var(--pink-700);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .detail-card h3 .num {
+    font-size: 13px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--pink-100);
+    border: 1px solid var(--pink-300);
+    color: var(--pink-600);
+  }
+
+  .detail-card blockquote {
+    margin: 12px 0 0;
+    padding: 10px 16px;
+    border-left: 3px solid var(--pink-500);
+    background: var(--pink-50);
+    border-radius: 0 10px 10px 0;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ===== 联系方式 ===== */
+  .contact-card {
+    text-align: center;
+    padding: 44px 24px;
+    background: linear-gradient(135deg, var(--pink-100), #fff);
+    border-radius: var(--radius);
+    border: 1px solid var(--pink-200);
+  }
+
+  .contact-card p { color: var(--ink-soft); }
+
+  .contact-mail {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 10px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(240, 127, 168, .45);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .contact-mail:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(240, 127, 168, .55); }
+
+  footer {
+    text-align: center;
+    padding: 26px 16px 34px;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  footer .heart { color: var(--pink-500); }
+
+  /* ===== 滚动淡入 ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ===== 灯箱 ===== */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(40, 8, 24, .9);
+    padding: 24px;
+  }
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: min(92vw, 720px);
+    max-height: 84vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+  }
+
+  .lightbox .lb-caption {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 15px;
+    text-shadow: 0 1px 4px rgba(0,0,0,.6);
+    white-space: nowrap;
+  }
+
+  .lightbox button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .14);
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .lightbox button:hover { background: rgba(255, 255, 255, .3); }
+  .lightbox .lb-prev { left: 18px; }
+  .lightbox .lb-next { right: 18px; }
+  .lightbox .lb-close {
+    top: 18px;
+    right: 18px;
+    transform: none;
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 720px) {
+    .nav-toggle { display: block; }
+
+    .nav-links {
       position: fixed;
-      top: 0;
+      top: var(--nav-h);
       left: 0;
       right: 0;
-      z-index: 100;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      background: #fdeef3 ;
-      border-bottom: 1px solid #f8c8d8;
-    }
-
-    .nav a {
-      color: #a8436b;
-      text-decoration: none;
-      padding: 4px 2px;
-      border-bottom: 2px solid transparent;
-    }
-
-    .nav a:hover {
-      border-bottom-color:#f07fa8 ;
-    }
-
-    /* ===== 内容卡片 ===== */
-    main {
-      max-width: 1000px;
-      margin: 32px auto;
-      padding: 36px;
-      background:  #ffffff;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px rgba(184, 58, 107, .08);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 30px;
-      color:  #b83a6b;
-    }
-
-    h2 {
-      margin: 0 0 14px;
-      font-size: 22px;
-      color: #d9558a;
-    }
-
-    h3 {
-      margin: 0 0 8px;
-      margin-top: 18px;
-      font-size: 19px;
-      color: #ec6a9c;
-    }
-
-    /* 只有直接放在 main 下的 h2 才需要上间距 */
-    main > h2 { margin-top: 32px; }
-
-    p { margin: 0 0 12px; }
-
-    a { color:  #d9558a; }
-
-    /* ===== 个人简介 ===== */
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      margin-top: 26px;
-      padding: 26px;
-      background:#fdf0f5;
-      border-radius: 12px;
-    }
-
-    .avatar {
-      flex-shrink: 0;
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #fbd0e0,  #f4a0c0);
-      color: #a8436b ;
-      font-size: 42px;
-      line-height: 96px;
-      text-align: center;
-    }
-
-    /* ===== 作品列表 ===== */
-    .works {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-    }
-
-    .work {
-      flex: 1 1 240px;
-      display: flex;
       flex-direction: column;
-      padding: 20px;
-      background:#fffafc ;
-      border: 1px solid  #f8d4e0;
-      border-radius: 12px;
+      gap: 0;
+      background: rgba(253, 238, 243, .97);
+      border-bottom: 1px solid var(--pink-300);
+      padding: 8px 24px 16px;
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
     }
+    .nav-links.open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .nav-links a { padding: 12px 4px; border-bottom: none; font-size: 17px; }
+    .nav-links a.active { color: var(--pink-600); }
 
-    .work-links {
-      margin-top: auto;
-      display:flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .profile { flex-direction: column; text-align: center; padding: 26px 20px; }
+    .tags { justify-content: center; }
 
-    .work-links a {
-     font-weight: bold;
-     text-decoration: none;
-     color:#d9558a;
-    }
-    .work-links a:hover {
-     color:#b83a6b ;
-    }
-    /* ===== 分隔区块 ===== */
-    .details,
-    .contact {
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid #f8d4e0;
-    }
+    .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .gallery figcaption { opacity: 1; padding: 18px 10px 8px; font-size: 13px; }
 
-    footer {
-      margin-top: 28px;
-      text-align: center;
-      color:#8a6b76 ;
-      font-size: 15px;
-    }
-
-
+    main { padding: 0 16px 32px; }
+    .lightbox img { max-width: 94vw; }
+    .lightbox .lb-prev { left: 8px; }
+    .lightbox .lb-next { right: 8px; }
+  }
 </style>
 </head>
 <body>
-    <nav class="nav">
-    <a href="#home">首页</a>
+
+<nav class="nav">
+  <a class="nav-logo" href="#home"><span class="logo-dot">梁</span>minjing</a>
+  <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" class="active">首页</a>
     <a href="#about">关于我</a>
     <a href="#works">我的作品</a>
+    <a href="#gallery">摄影集</a>
     <a href="#contact">联系我</a>
-  </nav>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <span class="hero-badge">✦ WELCOME TO MY PAGE</span>
+  <h1>你好，我是梁敏晶</h1>
+  <p class="sub">滑板爱好者 × 校园摄影新人 × 资深番剧观众<br>在这里记录我热爱的每一件小事</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#about">了解我</a>
+    <a class="btn btn-ghost" href="#gallery">看摄影集</a>
+  </div>
+</header>
 
 <main>
-    <header id="home">
-       <h1>梁敏晶的个人主页</h1>
-    </header>
-    
-    <section class="profile" id="about">
+  <!-- 关于我 -->
+  <section class="block reveal" id="about">
+    <div class="block-head">
+      <h2>关于我</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="profile">
       <div class="avatar">梁</div>
       <div>
-        <h2>你好呀~我是梁敏晶</h2>
-        <p>喜欢滑板，也喜欢看小说动漫电影，如果大家有好看的番，多多推荐给我吧！˶╹ᵕ╹˶</p>
-        <p>同时，我也喜欢摄影。</p>
-      </div>
-    </section>
-
-     <h2 id="works">我的作品</h2>
-    <section class="works">
-      <article class="work">
-        <h3>个人主页</h3>
-        <p>用来展示我的滑板</p>
-        <div class="work-links">
-        <a href="4.jpg" target="_blank">查看作品</a></div>
-      </article>
-      <article class="work">
-        <h3>校园摄影集</h3>
-        <p>用照片分享校园里的日常。</p>
-
-        <div class="work-links">
-        <a href="1.jpg" target="_blank">图一</a>
-        <a href="2.jpg" target="_blank">图二</a>
-        <a href="3.jpg" target="_blank">图三</a>
+        <h3>梁敏晶 / minjing</h3>
+        <p>喜欢滑板，也喜欢看小说、动漫和电影。如果大家有好看的番，多多推荐给我吧！˶╹ᵕ╹˶</p>
+        <p>同时，我也喜欢摄影——用镜头收藏校园里那些一闪而过的温柔时刻。</p>
+        <div class="tags">
+          <span class="tag">🛹 滑板</span>
+          <span class="tag">📷 摄影</span>
+          <span class="tag">🎬 电影</span>
+          <span class="tag">📺 动漫</span>
+          <span class="tag">📚 小说</span>
         </div>
-        
+      </div>
+    </div>
+  </section>
+
+  <!-- 我的作品 -->
+  <section class="block reveal" id="works">
+    <div class="block-head">
+      <h2>我的作品</h2>
+      <div class="divider"></div>
+      <p class="desc">目前还在慢慢积累中，欢迎围观~</p>
+    </div>
+    <div class="works">
+      <article class="work">
+        <div class="work-icon">🛹</div>
+        <h3>我的滑板</h3>
+        <p>用来展示我的滑板。站在滑板上，就是站在自由的边缘。</p>
+        <div class="work-links">
+          <a href="images/4.jpg" target="_blank" rel="noopener">查看大图</a>
+          <a href="#detail-skate">了解详情</a>
+        </div>
       </article>
-      </section> 
-      <section class="details">
+      <article class="work">
+        <div class="work-icon">📷</div>
+        <h3>校园摄影集</h3>
+        <p>用照片分享校园里的日常：傍晚的小路、午后的大草坪、亮着灯的夜晚。</p>
+        <div class="work-links">
+          <a href="#gallery">浏览摄影集</a>
+          <a href="#detail-photo">了解详情</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 摄影集 -->
+  <section class="block reveal" id="gallery">
+    <div class="block-head">
+      <h2>校园摄影集</h2>
+      <div class="divider"></div>
+      <p class="desc">点击照片可以放大查看 ✧</p>
+    </div>
+    <div class="gallery" id="galleryGrid">
+      <figure tabindex="0" data-large="images/1.jpg" data-caption="傍晚的小路 —— 晚霞与棕榈树">
+        <img src="images/1-sm.jpg" alt="傍晚的校园小路，天空是粉紫色的晚霞，路边有一棵高高的棕榈树" loading="lazy" width="294" height="640">
+        <figcaption>傍晚的小路 · 晚霞与棕榈树</figcaption>
+      </figure>
+      <figure tabindex="0" data-large="images/2.jpg" data-caption="大草坪的午后 —— 树荫下运动的人们">
+        <img src="images/2-sm.jpg" alt="午后的大草坪，人们在树下运动，远处是教学楼" loading="lazy" width="294" height="640">
+        <figcaption>大草坪的午后 · 树荫与草坪</figcaption>
+      </figure>
+      <figure tabindex="0" data-large="images/3.jpg" data-caption="夜晚的穹顶楼 —— 灯光倒映在水面">
+        <img src="images/3-sm.jpg" alt="夜晚的教学楼，穹顶亮着灯光，倒映在面前的水面上" loading="lazy" width="360" height="640">
+        <figcaption>夜晚的穹顶楼 · 灯光与倒影</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 作品详情 -->
+  <section class="block reveal" id="details">
+    <div class="block-head">
       <h2>作品详情</h2>
-      <h3 id="project-1">个人主页</h3>
-      <p>滑板是一项很酷的运动，有句话说得好：“站在滑板上，就是站在自由的边缘。”</p>
-      <h3 id="project-2">校园摄影集</h3>
-      <p>上外的校园很美，每次漫步在校园中，都感觉无比幸福。要是没有各种ddl的催促，我想我会更享受这份宁静。</p>
-      </section>
-      <section class="contact" id="contact">
-      <h2>我的联系方式</h2>
-      <p>欢迎大家来和我一起交流番剧，滑板以及摄影相关的话题~</p>
-      <p>邮箱：<a href="mailto:l914628325@qq.com">l914628325@qq.com</a></p>
-    </section>
+      <div class="divider"></div>
+    </div>
+    <div class="detail-card" id="detail-skate">
+      <h3><span class="num">01</span>我的滑板</h3>
+      <p>滑板是一项很酷的运动。它教会我的不只是平衡，还有摔倒之后拍拍灰再站起来的勇气。</p>
+      <blockquote>"站在滑板上，就是站在自由的边缘。"</blockquote>
+    </div>
+    <div class="detail-card" id="detail-photo">
+      <h3><span class="num">02</span>校园摄影集</h3>
+      <p>上外的校园很美，每次漫步在校园中，都感觉无比幸福。要是没有各种 ddl 的催促，我想我会更享受这份宁静。</p>
+      <blockquote>按下快门的那一刻，时间就被温柔地留住了。</blockquote>
+    </div>
+  </section>
+
+  <!-- 联系方式 -->
+  <section class="block reveal" id="contact">
+    <div class="block-head">
+      <h2>联系我</h2>
+      <div class="divider"></div>
+      <p class="desc">欢迎来和我交流番剧、滑板以及摄影相关的话题~</p>
+    </div>
+    <div class="contact-card">
+      <p>📮 邮箱是最快联系到我的方式：</p>
+      <a class="contact-mail" href="mailto:l914628325@qq.com">l914628325@qq.com</a>
+    </div>
+  </section>
 </main>
-<footer>梁敏晶的个人主页</footer>
+
+<footer>
+  梁敏晶的个人主页 · Made with <span class="heart">♥</span> and 滑板 &amp; 相机
+</footer>
+
+<!-- 灯箱 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片查看器">
+  <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="上一张">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" id="lbNext" aria-label="下一张">›</button>
+  <div class="lb-caption" id="lbCaption"></div>
+</div>
+
+<script>
+  // ===== 移动端菜单 =====
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  navLinks.addEventListener('click', e => {
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // ===== 滚动淡入 =====
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('visible');
+        revealObserver.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ===== 导航高亮 =====
+  const sections = ['home', 'about', 'works', 'gallery', 'contact'];
+  const linkMap = {};
+  navLinks.querySelectorAll('a').forEach(a => linkMap[a.getAttribute('href').slice(1)] = a);
+
+  const navObserver = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+        linkMap[en.target.id]?.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+
+  // ===== 灯箱 =====
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  const figures = [...document.querySelectorAll('#galleryGrid figure')];
+  let current = 0;
+
+  function openLb(i) {
+    current = (i + figures.length) % figures.length;
+    const fig = figures[current];
+    lbImg.src = fig.dataset.large;
+    lbImg.alt = fig.querySelector('img').alt;
+    lbCaption.textContent = fig.dataset.caption;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLb() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  figures.forEach((fig, i) => {
+    fig.addEventListener('click', () => openLb(i));
+    fig.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(i); }
+    });
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLb);
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); openLb(current - 1); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); openLb(current + 1); });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') openLb(current - 1);
+    if (e.key === 'ArrowRight') openLb(current + 1);
+  });
+</script>
 </body>
 </html>
