@@ -276,16 +276,36 @@
     box-shadow: 0 12px 28px rgba(184, 58, 107, .16);
   }
 
+  .work .work-head {
+    display: flex;
+    align-items: stretch;        /* 右侧缩略图与左侧图标+标题等高 */
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .work .work-head-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .work .work-head-left .work-icon { margin-bottom: 0; }
+  .work .work-head-left h3 { margin: 0; }
+
   .work .work-thumb {
-    margin: 0 0 14px;
+    margin: 0;
+    display: flex;
+    flex-shrink: 0;
   }
 
   .work .work-thumb img {
-    width: 52px;               /* 与滑板图标同宽 */
-    height: auto;
+    height: 100%;              /* 撑满左列「图标+标题」的总高度 */
+    width: auto;
+    object-fit: contain;       /* 完整显示，不裁切 */
     border-radius: 10px;
     border: 1px solid var(--pink-200);
-    object-fit: contain;       /* 完整显示，不裁切 */
   }
 
   .work .work-icon {
@@ -639,11 +659,15 @@
     </div>
     <div class="works">
       <article class="work">
-        <div class="work-icon">🛹</div>
-        <figure class="work-thumb">
-          <img src="images/4-sm.jpg" alt="我的滑板照片" loading="lazy" width="640" height="480">
-        </figure>
-        <h3>我的滑板</h3>
+        <div class="work-head">
+          <div class="work-head-left">
+            <div class="work-icon">🛹</div>
+            <h3>我的滑板</h3>
+          </div>
+          <figure class="work-thumb">
+            <img src="images/4-sm.jpg" alt="我的滑板照片" loading="lazy" width="640" height="480">
+          </figure>
+        </div>
         <p>用来展示我的滑板。站在滑板上，就是站在自由的边缘。</p>
         <div class="work-links">
           <a href="images/4.jpg" target="_blank" rel="noopener">查看大图</a>
