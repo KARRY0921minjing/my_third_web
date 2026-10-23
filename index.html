@@ -278,16 +278,17 @@
 
   .work .work-head {
     display: flex;
-    align-items: stretch;        /* 右侧缩略图与左侧图标+标题等高 */
+    align-items: flex-start;     /* 顶部对齐，高度由内容自适应 */
     justify-content: space-between;
     gap: 14px;
     margin-bottom: 14px;
   }
 
   .work .work-head-left {
+    flex: 1 1 0;                 /* 左列与右图等宽 */
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 6px;
   }
 
@@ -296,14 +297,14 @@
 
   .work .work-thumb {
     margin: 0;
-    display: flex;
-    flex-shrink: 0;
+    flex: 1 1 0;                 /* 与左列同宽 */
+    min-width: 0;
   }
 
   .work .work-thumb img {
-    height: 100%;              /* 撑满左列「图标+标题」的总高度 */
-    width: auto;
-    object-fit: contain;       /* 完整显示，不裁切 */
+    width: 100%;                 /* 宽度 = 左列「图标+标题」整体宽度 */
+    height: auto;                /* 高度按比例自适应，不超出盒子 */
+    object-fit: contain;         /* 完整显示，不裁切 */
     border-radius: 10px;
     border: 1px solid var(--pink-200);
   }
