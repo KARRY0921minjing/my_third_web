@@ -276,6 +276,20 @@
     box-shadow: 0 12px 28px rgba(184, 58, 107, .16);
   }
 
+  .work .work-thumb {
+    margin: -24px -24px 16px;
+  }
+
+  .work .work-thumb img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius) var(--radius) 0 0;
+    transition: transform .4s ease;
+  }
+
+  .work:hover .work-thumb img { transform: scale(1.04); }
+
   .work .work-icon {
     width: 52px;
     height: 52px;
@@ -475,6 +489,59 @@
     height: 40px;
   }
 
+  /* ===== 音乐卡片 ===== */
+  .music-card {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 18px 20px;
+    background: #fff;
+    border: 1px solid var(--pink-200);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .music-card iframe {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .music-note {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  /* ===== 返回顶部 ===== */
+  .back-top {
+    position: fixed;
+    right: 22px;
+    bottom: 26px;
+    z-index: 150;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(240, 127, 168, .5);
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .3s, transform .3s, box-shadow .2s;
+  }
+
+  .back-top.show {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .back-top:hover { box-shadow: 0 10px 22px rgba(240, 127, 168, .6); }
+
   /* ===== 响应式 ===== */
   @media (max-width: 720px) {
     .nav-toggle { display: block; }
@@ -574,6 +641,9 @@
     </div>
     <div class="works">
       <article class="work">
+        <figure class="work-thumb">
+          <img src="images/4-sm.jpg" alt="我的滑板照片" loading="lazy" width="640" height="480">
+        </figure>
         <div class="work-icon">🛹</div>
         <h3>我的滑板</h3>
         <p>用来展示我的滑板。站在滑板上，就是站在自由的边缘。</p>
@@ -610,9 +680,9 @@
         <img src="images/2-sm.jpg" alt="午后的大草坪，人们在树下运动，远处是教学楼" loading="lazy" width="294" height="640">
         <figcaption>大草坪的午后 · 树荫与草坪</figcaption>
       </figure>
-      <figure tabindex="0" data-large="images/3.jpg" data-caption="夜晚的穹顶楼 —— 灯光倒映在水面">
-        <img src="images/3-sm.jpg" alt="夜晚的教学楼，穹顶亮着灯光，倒映在面前的水面上" loading="lazy" width="360" height="640">
-        <figcaption>夜晚的穹顶楼 · 灯光与倒影</figcaption>
+      <figure tabindex="0" data-large="images/3.jpg" data-caption="夜晚的图文大楼 —— 灯光倒映在水面">
+        <img src="images/3-sm.jpg" alt="夜晚的图文大楼，穹顶亮着灯光，倒映在面前的水面上" loading="lazy" width="360" height="640">
+        <figcaption>夜晚的图文大楼 · 灯光与倒影</figcaption>
       </figure>
     </div>
   </section>
@@ -635,6 +705,21 @@
     </div>
   </section>
 
+  <!-- 音乐分享 -->
+  <section class="block reveal" id="music">
+    <div class="block-head">
+      <h2>音乐分享 🎵</h2>
+      <div class="divider"></div>
+      <p class="desc">最近单曲循环：《未闻花名》ED —— secret base 〜君がくれたもの〜</p>
+    </div>
+    <div class="music-card">
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86"
+        src="//music.163.com/outchain/player?type=2&id=31649308&auto=0&height=66"
+        loading="lazy" title="未闻花名 ED 播放器"></iframe>
+      <p class="music-note">由网易云音乐提供外链播放 · 如果加载不出来，<a href="https://music.163.com/song?id=31649308" target="_blank" rel="noopener">点这里去网易云收听 ↗</a></p>
+    </div>
+  </section>
+
   <!-- 联系方式 -->
   <section class="block reveal" id="contact">
     <div class="block-head">
@@ -652,6 +737,9 @@
 <footer>
   梁敏晶的个人主页 · Made with <span class="heart">♥</span> and 滑板 &amp; 相机
 </footer>
+
+<!-- 返回顶部 -->
+<button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
 
 <!-- 灯箱 -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片查看器">
@@ -706,6 +794,13 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+
+  // ===== 返回顶部 =====
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 400);
+  }, { passive: true });
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ===== 灯箱 =====
   const lightbox = document.getElementById('lightbox');
