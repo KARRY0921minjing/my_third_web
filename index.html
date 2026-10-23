@@ -277,18 +277,16 @@
   }
 
   .work .work-thumb {
-    margin: -24px -24px 16px;
+    margin: 0 0 14px;
   }
 
   .work .work-thumb img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: var(--radius) var(--radius) 0 0;
-    transition: transform .4s ease;
+    width: 52px;               /* 与滑板图标同宽 */
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--pink-200);
+    object-fit: contain;       /* 完整显示，不裁切 */
   }
-
-  .work:hover .work-thumb img { transform: scale(1.04); }
 
   .work .work-icon {
     width: 52px;
@@ -641,10 +639,10 @@
     </div>
     <div class="works">
       <article class="work">
+        <div class="work-icon">🛹</div>
         <figure class="work-thumb">
           <img src="images/4-sm.jpg" alt="我的滑板照片" loading="lazy" width="640" height="480">
         </figure>
-        <div class="work-icon">🛹</div>
         <h3>我的滑板</h3>
         <p>用来展示我的滑板。站在滑板上，就是站在自由的边缘。</p>
         <div class="work-links">
